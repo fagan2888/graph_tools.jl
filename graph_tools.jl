@@ -53,7 +53,7 @@ end
 
 function cyclic_components(g::MyDiGraph)
     if is_aperiodic(g)
-        return [[1:g.n;] for i in 1:1]
+        return Array[[1:g.n]]
     else
         return [find(x -> x == k, g.cyclic_components_proj)
                 for k in 0:g.period-1]
@@ -78,7 +78,7 @@ function compute_period(g::MyDiGraph)
 
     # Determine the period
     d = 0
-    for (node_from, node_to) in edges(g_non_bfs_tree)
+    for (node_from, node_to) in LightGraphs.edges(g_non_bfs_tree)
         value = level[node_from] - level[node_to] + 1
         d = gcd(d, value)
         if d == 1
