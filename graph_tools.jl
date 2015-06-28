@@ -71,6 +71,10 @@ function compute_period(g::MyDiGraph)
         return Nothing
     end
 
+    # Use the algorithm described in:
+    # J. P. Jarvis and D. R. Shier,
+    # "Graph-Theoretic Analysis of Finite Markov Chains," 1996.
+
     root = 1
     g_bfs_tree = LightGraphs.bfs_tree(g.g, root)
     level = LightGraphs.gdistances(g_bfs_tree, root)
